@@ -1,3 +1,4 @@
+// @import ../../src/core/core
 // @import ../../src/dom/dom
 
-console.log("Hello, world!");
+console.log("Loaded all libraries.");

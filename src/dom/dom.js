@@ -13,16 +13,27 @@ var dom = {
     RANGE_ALL: -1,
 
     /*
+        @name dom.loaded
+
+        @param callback function Callback function to call when DOM has loaded.
+
+        @shortDescription Call callback function when DOM has loaded.
+    */
+    loaded: function(callback) {
+        window.onload = callback;
+    },
+
+    /*
         @name dom.element
 
-        @param selector string DOM selector to use. Default: `"window"`.
+        @param selector string DOM selector to use. Default: `"body"`.
         @param overrides object List of overrides to use instead of selector. Selector must be `""` for this parameter to register.
 
         @return object Dictionary of available functions and values.
 
         @shortDescription Get DOM object by selector or overrides and return properties associated with it.
     */
-    element: function(selector = "window", overrides = []) {
+    element: function(selector = "body", overrides = []) {
         var elements;
 
         if (selector == "") {
@@ -43,7 +54,7 @@ var dom = {
                     @shortDescription Get the HTML content of the first found matching element.
                 */
                 get: function() {
-                    return elements[1].innerHTML;
+                    return elements[0].innerHTML;
                 },
 
                 /*
@@ -51,12 +62,16 @@ var dom = {
 
                     @param content string HTML content to set.
 
+                    @return object Dictionary of available functions and values for original element.
+
                     @shortDescription Set the HTML content of all matching elements.
                 */
                 set: function(content) {
                     core.each(elements, function(key, value, dict) {
                         value.innerHTML = content;
                     });
+
+                    return dom.element("", elements);
                 }
             },
 
@@ -69,7 +84,7 @@ var dom = {
                     @shortDescription Get the text content of the first found matching element.
                 */
                 get: function() {
-                    return elements[1].textContent;
+                    return elements[0].textContent;
                 },
 
                 /*
@@ -77,12 +92,16 @@ var dom = {
 
                     @param content string Text content to set.
 
+                    @return object Dictionary of available functions and values for original element.
+
                     @shortDescription Set the text content of all matching elements.
                 */
                 set: function(content) {
                     core.each(elements, function(key, value, dict) {
                         value.textContent = content;
                     });
+
+                    return dom.element("", elements);
                 }
             },
 
@@ -105,7 +124,7 @@ var dom = {
                         @shortDescription Get the text content of the first found matching element's attribute.
                     */
                     get: function() {
-                        return elements[1].getAttribute(name);
+                        return elements[0].getAttribute(name);
                     },
 
                     /*
@@ -113,16 +132,22 @@ var dom = {
 
                         @param content string Text content to set.
 
+                        @return object Dictionary of available functions and values for original element.
+
                         @shortDescription Set attribute content of all matching elements.
                     */
                     set: function(content) {
                         core.each(elements, function(key, value, dict) {
                             value.setAttribute(name, content);
                         });
+
+                        return dom.element("", elements);
                     },
 
                     /*
                         @name dom.element( ... ).attribute( ... ).delete
+
+                        @return object Dictionary of available functions and values for original element.
 
                         @shortDescription Delete attribute of all matching elements.
                     */
@@ -130,6 +155,8 @@ var dom = {
                         core.each(elements, function(key, value, dict) {
                             value.removeAttribute(name);
                         });
+
+                        return dom.element("", elements);
                     },
 
                     /*
@@ -163,6 +190,17 @@ var dom = {
             },
 
             /*
+                @name dom.element( ... ).childCount
+
+                @return number Number of child elements of first found matching element.
+
+                @shortDescription Get number of child elements of first found matching element.
+            */
+            childCount: function() {
+                return elements[0].children.length;
+            },
+
+            /*
                 @name dom.element( ... ).parent
 
                 @return object Dictionary of available functions and values.
@@ -186,8 +224,25 @@ var dom = {
                 if (selection == dom.RANGE_ALL) {
                     return dom.element("", elements);
                 } else {
-                    return dom.element("", elements[selection]);
+                    return dom.element("", [elements[selection]]);
                 }
+            },
+
+            /*
+                @name dom.element( ... ).newChild
+
+                @param element object Child element to add to all matching elements.
+
+                @return object Dictionary of available functions and values for original element.
+
+                @shortDescription Add child element to all matching elements.
+            */
+            newChild: function(element) {
+                core.each(elements, function(key, value, dict) {
+                    value.appendChild(element.reference[0]);
+                });
+
+                return dom.element("", elements);
             },
 
             events: {
@@ -198,6 +253,8 @@ var dom = {
                     @param callback function Callback to call when the event is raised.
                     @param useCapture boolean Use event capturing instead of event bubbling. Default is `false`.
 
+                    @return object Dictionary of available functions and values for original element.
+
                     @shortDescription Listen to the given future event for all matching elements, and call function when the event is raised.
                     @longDescription Event bubbling is where the event handling is passed from the first child all the way to the root element. Event capturing is going the other way.
                 */
@@ -205,6 +262,8 @@ var dom = {
                     core.each(elements, function(key, value, dict) {
                         value.addEventListener(event, callback, useCapture);
                     });
+
+                    return dom.element("", elements);
                 },
 
                 /*
@@ -213,14 +272,31 @@ var dom = {
                     @param event string Name of event to use.
                     @param usedCallback function Callback to ignore when the event is raised.
 
+                    @return object Dictionary of available functions and values for original element.
+
                     @shortDescription Ignore the callback given to the future event for all matching elements.
                 */
                 ignore: function(event, usedCallback) {
                     core.each(elements, function(key, value, dict) {
                         value.removeEventListener(event, usedCallback);
                     });
+
+                    return dom.element("", elements);
                 }
             }
         };
+    },
+
+    /*
+        @name dom.new
+
+        @param name string Name of element to specify.
+
+        @return object Dictionary of available functions and values.
+
+        @shortDescription Create new DOM object by element name without attaching it to DOM.
+    */
+    new: function(name) {
+        return dom.element("", [document.createElement(name)]);
     }
 };
