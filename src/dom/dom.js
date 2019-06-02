@@ -245,6 +245,85 @@ var dom = {
                 return dom.element("", elements);
             },
 
+            style: {
+                /*
+                    @name dom.element( ... ).style.get
+
+                    @param property string Name of styling property to get from first matching element.
+
+                    @return any Value of styling property taken from first matching element.
+
+                    @shortDescription Get styling property from first mathing element.
+                */
+                get: function(property) {
+                    return elements[0].style[property];
+                },
+
+                /*
+                    @name dom.element( ... ).style.getAll
+
+                    @return object Dictionary of all styling properties taken from first matching element.
+
+                    @shortDescription Get all styling properties from first matching element.
+                */
+                getAll: function() {
+                    return elements[0].style;
+                },
+
+                /*
+                    @name dom.element( ... ).style.set
+
+                    @param property string Name of styling property to set for all matching elements.
+                    @param value any Value of styling property to set for all matching elements.
+
+                    @return object Dictionary of available functions and values for original element.
+
+                    @shortDescription Set styling property value for all matching elements.
+                */
+                set: function(property, value) {
+                    core.each(elements, function(key, elementValue, dict) {
+                        elementValue.style[property] = value;
+                    });
+
+                    return dom.element("", elements);
+                },
+
+                /*
+                    @name dom.element( ... ).style.setPush
+
+                    @param dict object Dictionary of styling properties to push to all matching elements.
+
+                    @return object Dictionary of available functions and values for original element.
+
+                    @shortDescription Push styling properties from dictionary to all matching elements.
+                    @longDescription The matching elements will have the styling properties appended, or overwritten if the styling property already exists. 
+                */
+                setPush: function(dict) {
+                    core.each(elements, function(key, value, elementDict) {
+                        core.unpack(dict, value.style);
+                    });
+
+                    return dom.element("", elements);
+                },
+
+                /*
+                    @name dom.element( ... ).style.delete
+
+                    @param property string Name of styling property to delete for all matching elements.
+
+                    @return object Dictionary of available functions and values for original element.
+
+                    @shortDescription Delete styling property for all matching elements.
+                */
+                delete: function(property) {
+                    core.each(elements, function(key, value, dict) {
+                        value.style.removeProperty(property);
+                    });
+
+                    return dom.element("", elements);
+                }
+            },
+
             events: {
                 /*
                     @name dom.element( ... ).events.listen
