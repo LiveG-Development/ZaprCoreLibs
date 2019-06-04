@@ -245,6 +245,17 @@ var dom = {
                 return dom.element("", elements);
             },
 
+            /*
+                @name dom.element( ... ).delete
+
+                @shortDescription Delete all matching elements.
+            */
+            delete: function() {
+                core.each(elements, function(key, value, dict) {
+                    value.remove();
+                });
+            },
+
             style: {
                 /*
                     @name dom.element( ... ).style.get
