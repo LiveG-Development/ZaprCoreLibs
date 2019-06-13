@@ -25,7 +25,7 @@ var importer = {
     },
 
     /*
-        @name importer.generateLinkDOMTag
+        @name importer.generateLinkDOMElement
 
         @param asset string Asset contents to use in Base64.
         @param type string Media type to use in link. Default: `"text/css"`.
