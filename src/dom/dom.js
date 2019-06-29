@@ -185,7 +185,7 @@ var dom = {
                 if (selection == dom.RANGE_ALL) {
                     return dom.element("", elements[0].children);
                 } else {
-                    return dom.element("", [elements[0].children[0]]);
+                    return dom.element("", [elements[0].children[selection]]);
                 }
             },
 
@@ -251,9 +251,9 @@ var dom = {
                 @shortDescription Delete all matching elements.
             */
             delete: function() {
-                core.each(elements, function(key, value, dict) {
-                    value.remove();
-                });
+                for (var i = elements.length - 1; i >= 0; i--) {
+                    elements[i].remove();
+                }
             },
 
             style: {
