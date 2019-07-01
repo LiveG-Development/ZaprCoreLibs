@@ -1,0 +1,10 @@
+{
+    "friendlyName": "中文（简体，中国）",
+    "friendlyNameShort": "中文",
+    "direction": "ltr",
+    "strings": {
+        "title": "L10n测试",
+        "heading": "你好，世界！",
+        "paragraph": "这是对我的精彩应用程序的测试。"
+    }
+}

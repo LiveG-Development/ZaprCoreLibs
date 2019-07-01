@@ -1,0 +1,10 @@
+{
+    "friendlyName": "Français (France)",
+    "friendlyNameShort": "Français",
+    "direction": "ltr",
+    "strings": {
+        "title": "Tests de L10n",
+        "heading": "Bonjour, le monde !",
+        "paragraph": "Ceci est un test de mon application brillant."
+    }
+}

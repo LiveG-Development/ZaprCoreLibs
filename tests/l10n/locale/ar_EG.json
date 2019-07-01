@@ -1,0 +1,10 @@
+{
+    "friendlyName": "العربية (مصر)",
+    "friendlyNameShort": "العربية",
+    "direction": "rtl",
+    "strings": {
+        "title": "اختبارات L10n",
+        "heading": "مرحبا، بالعالم!",
+        "paragraph": "هذا اختبار لتطبيقي الرائع."
+    }
+}

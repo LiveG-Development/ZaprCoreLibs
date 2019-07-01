@@ -28,7 +28,7 @@ var core = {
         @name core.unpack
 
         @param dict object Dictionary to unpack.
-        @param target object Target to unpack to. Default is `window`.
+        @param target object Target to unpack to. Default: `window`.
 
         @shortDescription Unpack a dictionary to a target.
         @longDescription The target will have the key-value pairs appended, or overwritten if the key-value pair already exists. 
@@ -39,5 +39,37 @@ var core = {
                 target[key] = dict[key];
             }
         }
+    },
+
+    /*
+        @name core.request
+
+        @param url string URL to use in request.
+        @param callback function Callback function to call when response is returned, arguments given are `data`, `status`, `state` and `type`.
+        @param type string Type of request to use (like `GET`, `POST` and `PUT`). Default: `"GET"`.
+        @param body any Body to send in request (mainly just for `POST` requests). Default: `null`.
+
+        @shortDescription Request for data from server using HTTP requests.
+    */
+    request: function(url, callback, type = "GET", body = null) {
+        var request = new XMLHttpRequest();
+
+        request.onreadystatechange = callback(request.responseText, {code: request.status, message: request.statusText}, request.readyState, request.responseType);
+
+        request.open(type, url, true);
+        request.send(body);
+    },
+
+    /*
+        @name core.parameter
+
+        @param parameter string Parameter to get from URL.
+
+        @return any Value of parameter. `null` if parameter is not found.
+
+        @shortDescription Get a parameter from URL.
+    */
+    parameter: function(parameter) {
+        return decodeURIComponent((new RegExp("[?|&]" + parameter + "=" + "([^&;]+?)(&|#|;|$)").exec(location.search) || [null, ""])[1].replace(/\+/g, "%20")) || null;
     }
 };

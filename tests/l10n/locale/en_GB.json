@@ -1,0 +1,10 @@
+{
+    "friendlyName": "English (United Kingdom)",
+    "friendlyNameShort": "English",
+    "direction": "ltr",
+    "strings": {
+        "title": "L10n Tests",
+        "heading": "Hello, world!",
+        "paragraph": "This is a test of my brilliant app."
+    }
+}

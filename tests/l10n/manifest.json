@@ -1,0 +1,18 @@
+{
+    "package": "tech.liveg.opensource.l10n",
+    "version": "0.1.0",
+    "name": {
+        "en_GB": "L10n Tests",
+        "fr_FR": "Tests de L10n",
+        "zh_CN": "L10n测试",
+        "ar_EG": "اختبارات L10n"
+    },
+    "description": {
+        "en_GB": "Testing the l10n capabilities of the l10n library.",
+        "fr_FR": "Test des capacités l10n de la bibliothèque l10n.",
+        "zh_CN": "测试l10n库的l10n功能。",
+        "ar_EG": "اختبار قدرات l10n لمكتبة l10n."
+    },
+    "defaultLocale": "en_GB",
+    "mainScript": "script.js"
+}

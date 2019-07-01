@@ -38,5 +38,18 @@ var importer = {
             .attribute("rel").set(relation)
             .attribute("href").set(importer.generateLink(asset, type))
         ;
+    },
+
+    /*
+        @name importer.getString
+
+        @param asset string Asset to use in Base64.
+
+        @shortDescription Get string from Base64 asset.
+    */
+    getString: function(asset) {
+        return decodeURIComponent(atob(asset).split("").map(function(char) {
+            return "%" + ("00" + char.charCodeAt(0).toString(16)).slice(-2);
+        }).join(""));
     }
 };
