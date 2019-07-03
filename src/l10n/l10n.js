@@ -12,7 +12,6 @@
 var l10n = {
     locales: {},
     language: "xx_XX",
-    defaultLanguage: "xx_XX",
     log: [],
 
     languageData: {
