@@ -142,8 +142,12 @@ var l10n = {
                     }
                 }
 
+                l10n.addToLog(string, foundTranslation);
+
                 return foundTranslation;
             } else {
+                l10n.addToLog(string, null, false);
+
                 throw "Could not translate string \"" + string + "\"";
             }
         } else {
