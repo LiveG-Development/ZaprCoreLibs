@@ -137,9 +137,9 @@ var l10n = {
             if (foundTranslation != null) {
                 for (var argument in arguments) {
                     if (useLocaleFormats) {
-                        foundTranslation = foundTranslation.replace(new RegExp("{" + argument + "}", "g"), arguments.formatLocale(l10n.language));
+                        foundTranslation = foundTranslation.replace(new RegExp("{" + argument + "}", "g"), l10n.formatLocale(argument, l10n.language));
                     } else {
-                        foundTranslation = foundTranslation.replace(new RegExp("{" + argument + "}", "g"), arguments);
+                        foundTranslation = foundTranslation.replace(new RegExp("{" + argument + "}", "g"), argument);
                     }
                 }
 
