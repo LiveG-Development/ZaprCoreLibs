@@ -88,9 +88,9 @@ var l10n = {
     */
     formatLocale: function(data, code, options = {}) {
         if (data instanceof Number) {
-            return data.toLocaleString(code, options);
+            return data.toLocaleString(code.replace(/_/g, "-"), options);
         } else if (data instanceof Date) {
-            return data.toLocaleDateString(code, options);
+            return data.toLocaleDateString(code.replace(/_/g, "-"), options);
         } else {
             return data;
         }
