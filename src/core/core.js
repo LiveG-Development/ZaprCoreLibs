@@ -71,5 +71,25 @@ var core = {
     */
     parameter: function(parameter) {
         return decodeURIComponent((new RegExp("[?|&]" + parameter + "=" + "([^&;]+?)(&|#|;|$)").exec(location.search) || [null, ""])[1].replace(/\+/g, "%20")) || null;
+    },
+
+    /*
+        @name core.generateKey
+
+        @param length number Length of string to use as key.
+        @param digits string String of digits to use when generating key.
+
+        @return string Value of newly generated key.
+
+        @shortDescription Generate a random key based on the length and digits requested.
+    */
+    generateKey: function(length = 16, digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_") {
+        var key = "";
+
+        for (var i = 0; i < length; i++) {
+            key += digits.charAt(Math.floor(Math.random() * digits.length));
+        }
+
+        return key;
     }
 };
