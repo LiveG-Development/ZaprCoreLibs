@@ -122,10 +122,14 @@ var l10n = {
                     var originalRule = rule;
 
                     for (var argument in arguments) {
-                        rule = rule.replace(new RegExp("{" + argument + "}", "g"), arguments);
+                        if (useLocaleFormats) {
+                            rule = rule.replace(new RegExp("\\{" + argument + "\\}", "g"), lang.format(arguments, lang.language));
+                        } else {
+                            rule = rule.replace(new RegExp("\\{" + argument + "\\}", "g"), lang.format(arguments, lang.language));
+                        }
                     }
 
-                    if (eval(rule.replace(new RegExp("{arg}", "g"), arguments[argument])) == true) {
+                    if (eval(Object.keys(rules)[argument].replace(new RegExp("{arg}", "g"), "`" + arguments[argument].replace(/`/g, "\\`") + "`")) == true) {
                         foundTranslation = rules[originalRule];
                     }
                 }
@@ -134,14 +138,10 @@ var l10n = {
             }
 
             if (foundTranslation != null) {
-                for (var argument in arguments) {
-                    if (useLocaleFormats) {
-                        foundTranslation = foundTranslation.replace(new RegExp("{" + argument + "}", "g"), l10n.formatLocale(argument, l10n.language));
-                    } else {
-                        foundTranslation = foundTranslation.replace(new RegExp("{" + argument + "}", "g"), argument);
-                    }
+                for (var i = 0; i < 1000; i++) {
+                    foundTranslation = foundTranslation.replace(new RegExp("\\{" + i + "\\}", "g"), arguments[i]);
                 }
-
+                
                 l10n.addToLog(string, foundTranslation);
 
                 return foundTranslation;
