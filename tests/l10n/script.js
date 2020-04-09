@@ -35,4 +35,6 @@ dom.loaded(function() {
 
     dom.element().newChild(dom.new("h1").text.set(_("heading")));
     dom.element().newChild(dom.new("p").text.set(_("paragraph")));
+    dom.element().newChild(dom.new("p").text.set(_("example1", [5])));
+    dom.element().newChild(dom.new("p").text.set(_("example2", [8])));
 });

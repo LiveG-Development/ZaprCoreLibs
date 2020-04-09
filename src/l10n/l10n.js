@@ -123,13 +123,13 @@ var l10n = {
 
                     for (var argument in arguments) {
                         if (useLocaleFormats) {
-                            rule = rule.replace(new RegExp("\\{" + argument + "\\}", "g"), lang.format(arguments, lang.language));
+                            rule = rule.replace(new RegExp("\\{" + argument + "\\}", "g"), "`" + String(l10n.formatLocale(arguments, l10n.language)).replace(/`/g, "\\`") + "`");
                         } else {
-                            rule = rule.replace(new RegExp("\\{" + argument + "\\}", "g"), lang.format(arguments, lang.language));
+                            rule = rule.replace(new RegExp("\\{" + argument + "\\}", "g"), "`" + String(arguments).replace(/`/g, "\\`") + "`");
                         }
                     }
 
-                    if (eval(Object.keys(rules)[argument].replace(new RegExp("{arg}", "g"), "`" + arguments[argument].replace(/`/g, "\\`") + "`")) == true) {
+                    if (eval(rule)) {
                         foundTranslation = rules[originalRule];
                     }
                 }

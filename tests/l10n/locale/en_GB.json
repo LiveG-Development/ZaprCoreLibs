@@ -5,6 +5,11 @@
     "strings": {
         "title": "L10n Tests",
         "heading": "Hello, world!",
-        "paragraph": "This is a test of my brilliant app."
+        "paragraph": "This is a test of my brilliant app.",
+        "example1": "Trees: {0}",
+        "example2": {
+            "{0} == `1`": "There is 1 banana up a tree.",
+            "{0} != `1`": "There are {0} bananas up a tree."
+        }
     }
 }
