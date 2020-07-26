@@ -5,6 +5,13 @@
     "strings": {
         "title": "Tests de L10n",
         "heading": "Bonjour, le monde !",
-        "paragraph": "Ceci est un test de mon application brillant."
+        "paragraph": "Ceci est un test de mon application brillant.",
+        "example1": "Arbres: {0}",
+        "example2": {
+            "{0} == `1`": "Il y a 1 banane dans un arbre.",
+            "{0} != `1`": "TIl y a {0} bananes sur un arbre."
+        },
+        "date": "Aujourd'hui est {0}",
+        "time": "Il est actuellement {0}"
     }
 }

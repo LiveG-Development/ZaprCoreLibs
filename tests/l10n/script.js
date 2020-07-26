@@ -37,4 +37,8 @@ dom.loaded(function() {
     dom.element().newChild(dom.new("p").text.set(_("paragraph")));
     dom.element().newChild(dom.new("p").text.set(_("example1", [5])));
     dom.element().newChild(dom.new("p").text.set(_("example2", [8])));
+    dom.element().newChild(dom.new("p").text.set(_("date", [new Date()]))),
+    dom.element().newChild(dom.new("p").text.set(_("time", [
+        l10n.formatLocale(new Date(), l10n.language, {time: true})
+    ])))
 });

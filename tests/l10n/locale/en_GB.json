@@ -10,6 +10,8 @@
         "example2": {
             "{0} == `1`": "There is 1 banana up a tree.",
             "{0} != `1`": "There are {0} bananas up a tree."
-        }
+        },
+        "date": "Today is {0}",
+        "time": "It is currently {0}"
     }
 }
