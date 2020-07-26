@@ -85,12 +85,19 @@ var l10n = {
         @param data any Data to format in locale. Can be in `Number` class or `Date` class.
         @param code string Language code of language to use.
         @param options object Options to use when formatting. Default: `{}`.
+
+        @shortDescription Format a data type to be understandable in the specified locale.
+        @longDescription If the `data` parameter is an instance of `Date` and the `time` key in `options` has the value `true`, then the `data` parameter will be formatted as a time.
     */
     formatLocale: function(data, code, options = {}) {
         if (data instanceof Number) {
             return data.toLocaleString(code.replace(/_/g, "-"), options);
         } else if (data instanceof Date) {
-            return data.toLocaleDateString(code.replace(/_/g, "-"), options);
+            if (options["time"]) {
+                return data.toLocaleTimeString(code.replace(/_/g, "-"), options);
+            } else {
+                return data.toLocaleDateString(code.replace(/_/g, "-"), options);
+            }
         } else {
             return data;
         }
