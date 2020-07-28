@@ -54,7 +54,9 @@ var core = {
     request: function(url, callback, type = "GET", body = null) {
         var request = new XMLHttpRequest();
 
-        request.onreadystatechange = callback(request.responseText, {code: request.status, message: request.statusText}, request.readyState, request.responseType);
+        request.addEventListener("load", function() {
+            callback(this.responseText, {code: this.status, message: this.statusText}, this.readyState, this.responseType);
+        });
 
         request.open(type, url, true);
         request.send(body);
